@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Financeiro - Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        canvas {
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        nav {
+            background-color: #2980b9;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Banco Financeiro</h1>
+        <p>Seu parceiro de investimentos</p>
+    </header>
+
+    <nav>
+        <a href="#">Início</a>
+        <a href="#">Investimentos</a>
+        <a href="#">Empréstimos</a>
+        <a href="#">Contato</a>
+    </nav>
+
+    <main>
+        <canvas id="graficoLinha"></canvas>
+        <canvas id="graficoBarras"></canvas>
+        <canvas id="graficoPizza"></canvas>
+
+        <script>
+            // Dados simulados
+            var anos = [2020, 2021, 2022, 2023, 2024];
+            var vendasAcoes = [100, 120, 90, 110, 130];
+            var lucroAnual = [20, 15, -10, 20, 25];
+            var porcentagemLucroAnual = [(20 / 100) * 100, (15 / 120) * 100, (-10 / 90) * 100, (20 / 110) * 100, (25 / 130) * 100];
+
+            // Configurações comuns para os gráficos
+            var configuracoes = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            // Gráfico de Linha - Vendas de Ações ao Longo dos Anos
+            new Chart(document.getElementById('graficoLinha').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: anos,
+                    datasets: [{
+                        label: 'Vendas de Ações',
+                        data: vendasAcoes,
+                        fill: false,
+                        borderColor: '#3498db',
+                        borderWidth: 2
+                    }]
+                },
+                options: configuracoes
+            });
+
+            // Gráfico de Barras - Lucro Anual
+            new Chart(document.getElementById('graficoBarras').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: anos,
+                    datasets: [{
+                        label: 'Lucro Anual',
+                        data: lucroAnual,
+                        backgroundColor: '#2ecc71',
+                        borderColor: '#27ae60',
+                        borderWidth: 1
+                    }]
+                },
+                options: configuracoes
+            });
+
+            // Gráfico de Pizza - Porcentagem de Lucro Anual
+            new Chart(document.getElementById('graficoPizza').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: anos,
+                    datasets: [{
+                        data: porcentagemLucroAnual,
+                        backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6'],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: configuracoes
+            });
+        </script>
+    </main>
+
+</body>
+</html>

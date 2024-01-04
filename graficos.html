@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos Diversos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        canvas {
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="graficoBarras"></canvas>
+    <canvas id="graficoLinhas"></canvas>
+    <canvas id="graficoRadar"></canvas>
+    <canvas id="graficoDispersao"></canvas>
+    <canvas id="graficoPizza"></canvas>
+
+    <script>
+        // Dados para os gráficos
+        var dadosBarras = {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+            datasets: [{
+                label: 'Vendas Mensais',
+                data: [50, 80, 60, 90, 75],
+                backgroundColor: '#3498db',
+                borderColor: '#2980b9',
+                borderWidth: 1
+            }]
+        };
+
+        var dadosLinhas = {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+            datasets: [{
+                label: 'Vendas Mensais',
+                data: [50, 80, 60, 90, 75],
+                fill: false,
+                borderColor: '#e74c3c',
+                borderWidth: 2
+            }]
+        };
+
+        var dadosRadar = {
+            labels: ['Vendas', 'Marketing', 'Desenvolvimento', 'Suporte', 'Administração'],
+            datasets: [{
+                label: 'Desempenho por Departamento',
+                data: [70, 50, 80, 60, 75],
+                backgroundColor: 'rgba(46, 204, 113, 0.5)',
+                borderColor: '#2ecc71',
+                pointBackgroundColor: '#3498db',
+                borderWidth: 2
+            }]
+        };
+
+        var dadosDispersao = {
+            datasets: [{
+                label: 'Dispersão de Dados',
+                data: [
+                    { x: 10, y: 20 },
+                    { x: 15, y: 25 },
+                    { x: 30, y: 40 },
+                    { x: 40, y: 60 },
+                    { x: 50, y: 80 }
+                ],
+                backgroundColor: '#e67e22',
+                borderColor: '#d35400',
+                pointRadius: 8
+            }]
+        };
+
+        var dadosPizza = {
+            labels: ['Vendas', 'Marketing', 'Desenvolvimento', 'Suporte', 'Administração'],
+            datasets: [{
+                data: [20, 15, 30, 25, 10],
+                backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6'],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        };
+
+        // Configurações para os gráficos
+        var configuracoes = {
+            type: 'bar',
+            data: dadosBarras,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Criar os gráficos
+        new Chart(document.getElementById('graficoBarras').getContext('2d'), configuracoes);
+
+        configuracoes.type = 'line';
+        configuracoes.data = dadosLinhas;
+        new Chart(document.getElementById('graficoLinhas').getContext('2d'), configuracoes);
+
+        configuracoes.type = 'radar';
+        configuracoes.data = dadosRadar;
+        new Chart(document.getElementById('graficoRadar').getContext('2d'), configuracoes);
+
+        configuracoes.type = 'scatter';
+        configuracoes.data = dadosDispersao;
+        new Chart(document.getElementById('graficoDispersao').getContext('2d'), configuracoes);
+
+        configuracoes.type = 'doughnut';
+        configuracoes.data = dadosPizza;
+        new Chart(document.getElementById('graficoPizza').getContext('2d'), configuracoes);
+    </script>
+
+</body>
+</html>
